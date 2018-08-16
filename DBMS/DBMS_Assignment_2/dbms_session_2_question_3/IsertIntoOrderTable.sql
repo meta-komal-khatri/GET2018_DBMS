@@ -90,7 +90,38 @@ INSERT INTO storefront1.order_product (Order_Id,Product_Id,status,product_price)
                                                                                         (51,1,"Shipped",500);
                                                                                         
                                                                                         
-                                                                                        
+INSERT INTO storefront1.order (Shopper_Id,Status,Date_order,Order_cost) VALUES (3,"Initial",CURDATE(),200),
+                                                                                (6,"Initial",CURDATE(),10000),
+                                                                                (7,"Initial",CURDATE(),3000),
+                                                                                (1,"Initial",CURDATE(),1999),
+                                                                                (3,"Initial",CURDATE(),999),
+                                                                                (5,"Initial",CURDATE(),199),
+                                                                                (3,"Initial",CURDATE(),10000),
+                                                                                (2,"Initial",CURDATE(),15000),
+                                                                                (7,"Initial",CURDATE(),1300),
+                                                                                (3,"Initial",CURDATE(),1934),
+                                                                                (2,"Initial",CURDATE(),1987),
+                                                                                (1,"Initial",CURDATE(),109),
+                                                                                (3,"Initial",CURDATE(),102),
+                                                                                (4,"Initial",CURDATE(),190),
+                                                                                (5,"Initial",CURDATE(),120),
+                                                                                (6,"Initial",CURDATE(),1000);
+INSERT INTO storefront1.order (Shopper_Id,Status,Date_order,Order_cost) VALUES (3,"Initial",CURDATE(),200),
+                                                                                (6,"Initial",CURDATE(),10000),
+                                                                                (7,"Initial",CURDATE(),3000),
+                                                                                (1,"Initial",CURDATE(),1999),
+                                                                                (3,"Initial",CURDATE(),999),
+                                                                                (5,"Initial",CURDATE(),199),
+                                                                                (3,"Initial",CURDATE(),10000),
+                                                                                (2,"Initial",CURDATE(),15000),
+                                                                                (7,"Initial",CURDATE(),1300),
+                                                                                (3,"Initial",CURDATE(),1934),
+                                                                                (2,"Initial",CURDATE(),1987),
+                                                                                (1,"Initial",CURDATE(),109),
+                                                                                (3,"Initial",CURDATE(),102),
+                                                                                (4,"Initial",CURDATE(),190),
+                                                                                (5,"Initial",CURDATE(),120),
+                                                                                (6,"Initial",CURDATE(),1000);
                                                                                         
                                                                                         
                                                                                         

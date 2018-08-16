@@ -17,10 +17,33 @@ ON o.Order_Id=op.Order_Id
 WHERE op.Status="Initial" AND o.Date_order<CURDATE()-10;
 
 /**Display list of shoppers which haven't ordered anything since last month.**/
-
 SELECT ShopperID FROM shopper
 WHERE ShopperID NOT IN (SELECT Shopper_Id FROM storefront1.order 
-WHERE Date_order<CURDATE()-30);
+WHERE Date_order>CURDATE()-30);
+
+/**Display list of shopper along with orders placed by them in last 15 days. **/
+SELECT s.ShopperID,S_name,o.Order_Id FROM shopper s
+INNER JOIN storefront1.order o
+ON s.ShopperID=o.Shopper_Id
+WHERE o.Date_order>CURDATE()-15;
+
+/**Display list of order items which are in “shipped” state for particular Order Id (i.e.: 1020))**/
+SELECT Product_Id,p.P_Name,p.P_Detail,product_price FROM order_product
+INNER JOIN product p
+ON Product_Id=p.idProduct
+WHERE Order_Id=49 AND Status="Shipped";
+
+
+SELECT Product_Id,p.P_Name,p.P_Detail,product_price FROM order_product
+INNER JOIN product p
+ON Product_Id=p.idProduct
+WHERE Order_Id=43 AND Status="Shipped";
+
+/**Update first 20 Order items status to “Shipped” which are placed today.**/
+UPDATE storefront1.order 
+SET Status="Shipped"
+WHERE Date_order=CURDATE()
+LIMIT 20;
 
 
 
