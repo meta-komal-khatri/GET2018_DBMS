@@ -17,13 +17,32 @@ SELECT p.idProduct
 FROM product p
 WHERE p.idProduct NOT IN (SELECT Product_Id FROM product_images);
 
-#Display all Id, Title and Parent Category Title for all the 
-#Categories listed, sorted by Parent Category Title and then Category Title.
+USE StoreFront1;
 
-SELECT c.Category_Id,c.Category_type,IFNULL(cp.Category_type,c.Category_type) AS Parent_Category From category c
-LEFT JOIN category cp
-ON cp.Category_Id=c.Parent_Cat_Id
-ORDER BY c.Category_Type,cp.Category_type;
+
+#list of all product whose quantity is less than 50
+SELECT p.idProduct,p.P_Name,p.P_Price,p.P_Detail,s.Available_Quantity
+FROM product p
+INNER JOIN stock s
+ON p.idProduct=s.Product_Id
+WHERE s.Available_Quantity<51 AND s.Available_Quantity>0;
+
+#increase product quantity by 100 
+SET SQL_SAFE_UPDATES = 0;    /**without where clause we can not update**/
+
+UPDATE stock s1
+INNER JOIN stock s2 
+ON s1.Product_Id=s2.Product_Id
+SET s1.Available_Quantity=s2.Available_Quantity+100;
+
+
+
+
+
+
+
+
+
 
 
 
