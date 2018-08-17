@@ -35,6 +35,12 @@ INNER JOIN stock s2
 ON s1.Product_Id=s2.Product_Id
 SET s1.Available_Quantity=s2.Available_Quantity+100;
 
+/**Display Id, Title, Parent Category Title of all the leaf Categories (categories which are not parent of any other category)
+**/
+SELECT Category_Id FROM category cp
+WHERE cp.Category_Id NOT IN (SELECT c.Parent_Cat_Id FROM category c WHERE c.Parent_Cat_Id IS NOT NULL);
+
+
 
 
 
