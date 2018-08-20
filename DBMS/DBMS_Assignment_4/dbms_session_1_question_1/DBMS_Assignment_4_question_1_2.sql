@@ -10,9 +10,12 @@ BEGIN
     
     DECLARE order_month int(3);
     
-    SET order_month= (SELECT t.month,MAX(Counted) FROM ( SELECT MONTH(Date_order) AS month ,COUNT(Order_Id) As Counted FROM  storefront1.order 
-                                                WHERE YEAR(Date_order)=2018
-                                                GROUP BY MONTH(Date_order)) AS t);
+    SET order_month= ( SELECT MONTH(Date_order) AS month
+     FROM `order`
+     WHERE YEAR(Date_order) = 2018
+     GROUP BY MONTH(Date_order)
+     ORDER BY COUNT(Order_Id) DESC
+     LIMIT 1);
     RETURN (order_month);
 END $$
 
