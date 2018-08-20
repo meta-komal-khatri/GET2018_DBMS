@@ -30,7 +30,7 @@ LIMIT 5;
 **/
 /** for 6 months MONTH(Date_order)>MONTH(CURDATE())-6**/
 SELECT SUM(Order_cost), MONTH(Date_order) FROM storefront1.order
-WHERE MONTH(Date_order)>MONTH(CURDATE())-1                          
+WHERE MONTH(Date_order)>MONTH(CURDATE())-6                         
 GROUP BY YEAR(Date_order),MONTH(Date_order);
 
 
