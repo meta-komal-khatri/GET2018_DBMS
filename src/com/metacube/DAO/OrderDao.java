@@ -14,10 +14,11 @@ public class OrderDao extends QueryHandler {
 		super(conn);
 		
 	}
-	public List<Order> selectByShopperId(String query) 
+	public List<Order> selectByShopperId(int shopperId)
+	
 			throws NullResultSetException, NullConnectionException, SQLException,MySqlDriverClassException, NullPreparedStatementException{
 		ResultSet resultSet=null;
-		
+		String query=QueryHelper.selectOrdersByShopperId(shopperId);
 			try{
 				orderList=new ArrayList<Order>();
 				resultSet=select(query);

@@ -18,11 +18,11 @@ public class ProductImagesDao extends QueryHandler{
 		super(conn);
 		System.out.println("mdk");
 	}
-	public void insertImage(String query,List<String> images,int id) 
+	public void insertImage(List<String> images,int id) 
 			throws NullPreparedStatementException, SQLException, NullConnectionException, FileNotFoundException{
 		PreparedStatement preparedStatement=null;
 		FileInputStream inputStream=null;
-		
+		String query=QueryHelper.insertImages(id);
 		try{
 			
 			preparedStatement=conn.prepareStatement(query);
