@@ -12,7 +12,6 @@ public class OrderDao extends QueryHandler {
 	OrderDao(java.sql.Connection conn) {
 		
 		super(conn);
-		System.out.println("ksjc");
 		
 	}
 	public List<Order> selectByShopperId(String query) throws SQLException{
@@ -20,17 +19,14 @@ public class OrderDao extends QueryHandler {
 		try{
 			orderList=new ArrayList<Order>();
 			resultSet=select(query);
-			System.out.println(orderList.size());
 			while(resultSet.next()){
-				
 				orderList.add(new Order(resultSet.getInt("Order_Id"),resultSet.getDate("Date_order")));
-				System.out.println(orderList.size());
 			}
 		}catch(SQLException e){
 			
 		}
 		finally{
-			dbms_session_5.Connection.closeConection(conn);
+			ConnectionHelper.closeConection(conn);
 			resultSet.close();
 		}
 		return orderList;

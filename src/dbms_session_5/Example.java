@@ -7,10 +7,10 @@ public class Example {
 public static void main(String[] args) throws ClassNotFoundException, SQLException{
 	
 	String query=QueryHelper.selectOrdersByShopperId(5);
-	System.out.println(query);
-	OrderDao handler=new OrderDao(Connection.getConnection());
+	OrderDao handler=new OrderDao(ConnectionHelper.getConnection());
 	List<Order> orderlisthandler=handler.selectByShopperId(query);
 	System.out.println(orderlisthandler.toString());
+	QueryHelper.insertImages(3);
 	
 }
 }

@@ -4,8 +4,8 @@ package dbms_session_5;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public final class Connection {
-	private Connection(){
+public final class ConnectionHelper {
+	private ConnectionHelper(){
 		
 	}
 	public static java.sql.Connection getConnection() throws ClassNotFoundException, SQLException{
@@ -15,7 +15,6 @@ public final class Connection {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				conn=DriverManager.getConnection(DB_URL,"root", "1234");
-				System.out.println("njhs");
 			} 
 			catch (ClassNotFoundException e) {
 				throw new ClassNotFoundException("conn is null");
