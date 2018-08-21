@@ -1,10 +1,11 @@
-package dbms_session_5;
+package com;
 
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class Example {
-public static void main(String[] args) throws ClassNotFoundException, SQLException{
+public static void main(String[] args) throws ClassNotFoundException, SQLException, NullResultSetException, NullConnectionException, MySqlDriverClassException, NullPreparedStatementException, FileNotFoundException{
 	
 	String query=QueryHelper.selectOrdersByShopperId(5);
 	OrderDao handler=new OrderDao(ConnectionHelper.getConnection());

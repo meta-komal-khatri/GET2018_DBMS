@@ -1,5 +1,6 @@
-package dbms_session_5;
+package com;
 
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +15,17 @@ public class QueryHelper {
 				"'ORDER BY Date_order ASC";
 		return query;
 	}
-	public static void insertImages(int id) throws ClassNotFoundException, SQLException {
-		query="INSERT INTO product_images (P_Images) VALUES (?) WHERE Product_Id="+id;
+	public static void insertImages(int id) throws ClassNotFoundException, SQLException, MySqlDriverClassException, FileNotFoundException, NullPreparedStatementException, NullConnectionException {
+		query="INSERT INTO product_images (Product_Id,P_Images) VALUES (?,?)";
 		List<String> images=new ArrayList<String>();
 		//images.add("C:\\Users\\User30\\Desktop\\website.jpg");
-		images.add("C:\\Users\\User30\\Desktop\\website.jpg");
-		images.add("C:\\Users\\User30\\Desktop\\images.jpg");
+		images.add("C:\\Users\\popla\\Desktop\\download.jpg");
+		images.add("C:\\Users\\popla\\Desktop\\images.jpg");
 		ProductImagesDao dao=new ProductImagesDao(ConnectionHelper.getConnection());
-		dao.insertImage(query, images);
+		dao.insertImage(query, images,id);
 		
+	}
+	public void updateProductStatus() {
+		query="UPDATE product";
 	}
 }

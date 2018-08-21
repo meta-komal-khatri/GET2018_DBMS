@@ -1,4 +1,4 @@
-package dbms_session_5;
+package com;
 
 import java.sql.Blob;
 

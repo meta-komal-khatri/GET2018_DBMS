@@ -1,4 +1,4 @@
-package dbms_session_5;
+package com;
 
 
 import java.sql.Connection;
@@ -12,36 +12,65 @@ public class QueryHandler {
 	QueryHandler(Connection conn){
 		this.conn=conn;
 	}
-	public ResultSet select(String query) throws SQLException{
+	public ResultSet select(String query) 
+			throws SQLException, NullPreparedStatementException, NullResultSetException{
 		PreparedStatement statement = null;
 		ResultSet resultSet=null;
+		
 		try {
 			statement =(PreparedStatement) conn.prepareStatement(query);
 			resultSet=statement.executeQuery();
 			return resultSet;
-		} catch (SQLException e) {
+		}
+		
+		catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				if(statement!=null) {
-					statement.close();
-				}
-			}catch(SQLException se) {
-				se.printStackTrace();
-			}
+		}
+		
+		finally {
+			closePreparedStatement(statement);
+			closeResultSet(resultSet);
 		}
 	
 		return null;
 	}
-	public void insertIntoBatch(String query,List<String> images){
-		PreparedStatement preparedStatement=null;
-		/*try{
-			conn.setAutoCommit(false);
-			for (int i = 0; i < images.size(); i++) {
-				preparedStatement.setString(2, "RuleSubTitle");
-				preparedStatement.setInt(3, i);
-				preparedStatement.addBatch();
+	
+	
+	
+	public void closePreparedStatement(PreparedStatement statement) 
+			throws NullPreparedStatementException {
+		try {
+			if(statement!=null) {
+				statement.close();
 			}
-		}*/
+		}
+		
+		catch(SQLException se) {
+			throw new NullPreparedStatementException("Satement is null");
+		}
+		
+		
+	}
+	public void closeResultSet(ResultSet resultSet) throws NullResultSetException {
+		try {
+			if(resultSet!=null) {
+				resultSet.close();
+			}
+		}
+		
+		catch(SQLException se) {
+			throw new NullResultSetException("result set is null");
+		}
+	}
+	
+	public void rollback() throws NullConnectionException {
+		try {
+		if(conn!=null) {
+			conn.rollback();
+		}
+		
+		}catch(SQLException e) {
+			throw new NullConnectionException("Connecton is null");
+		}
 	}
 }
