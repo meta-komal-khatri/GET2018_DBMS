@@ -15,6 +15,7 @@ public final class Connection {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				conn=DriverManager.getConnection(DB_URL,"root", "1234");
+				System.out.println("njhs");
 			} 
 			catch (ClassNotFoundException e) {
 				throw new ClassNotFoundException("conn is null");

@@ -5,10 +5,12 @@ import java.util.List;
 
 public class Example {
 public static void main(String[] args) throws ClassNotFoundException, SQLException{
-	QueryHelper helper=new QueryHelper();
-	String query=helper.selectOrdersByShopperId(5);
+	
+	String query=QueryHelper.selectOrdersByShopperId(5);
+	System.out.println(query);
 	OrderDao handler=new OrderDao(Connection.getConnection());
 	List<Order> orderlisthandler=handler.selectByShopperId(query);
 	System.out.println(orderlisthandler.toString());
+	
 }
 }
