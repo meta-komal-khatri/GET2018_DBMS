@@ -1,4 +1,4 @@
-package com;
+package com.metacube.exception;
 
 @SuppressWarnings("serial")
 public class MySqlDriverClassException extends Exception {

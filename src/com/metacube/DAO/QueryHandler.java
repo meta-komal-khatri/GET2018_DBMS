@@ -1,5 +1,5 @@
-package com;
-
+package com.metacube.DAO;
+import com.metacube.exception.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;

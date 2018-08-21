@@ -1,5 +1,6 @@
-package com;
-
+package com.metacube.DAO;
+import com.metacube.exception.*;
+import com.metacube.jdbcConnection.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

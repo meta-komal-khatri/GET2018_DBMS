@@ -1,10 +1,11 @@
-package com;
+package com.metacube.DAO;
+import com.metacube.exception.*;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.metacube.jdbcConnection.*;
 public class QueryHelper {
 	private static String query;
 

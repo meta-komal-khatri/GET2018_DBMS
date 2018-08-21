@@ -1,4 +1,5 @@
-package com;
+package com.metacube.jdbcConnection;
+import com.metacube.exception.*;
 
 
 import java.sql.Connection;
