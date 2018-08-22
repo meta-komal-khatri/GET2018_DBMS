@@ -1,4 +1,4 @@
-package com.metacube.DAO;
+package com.metacube.pojos;
 
 
 import java.sql.Blob;

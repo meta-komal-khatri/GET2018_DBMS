@@ -1,6 +1,8 @@
-package com.metacube.DAO;
+package com.metacube.dao;
+
 import com.metacube.exception.*;
 
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -12,30 +14,25 @@ public class QueryHandler {
 	QueryHandler(Connection conn){
 		this.conn=conn;
 	}
-	public ResultSet select(String query) 
-			throws SQLException, NullPreparedStatementException, NullResultSetException{
+	public ResultSet selectShopperById(int id) {
 		PreparedStatement statement = null;
 		ResultSet resultSet=null;
-		
 		try {
-			statement =(PreparedStatement) conn.prepareStatement(query);
+			String query=QueryHelper.selectOrdersByShopperId(id);
+			statement =conn.prepareStatement(query);
+			statement.setInt(1,id);
 			resultSet=statement.executeQuery();
-			return resultSet;
 		}
-		
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		finally {
-			closePreparedStatement(statement);
-			closeResultSet(resultSet);
-		}
-	
-		return null;
+		return resultSet;
 	}
 	
+	public void insertImagesIntoProduct(List<String> images,int id){
+		ProductImagesDao dao=new ProductImagesDao(conn);
 	
+	}
 	
 	public void closePreparedStatement(PreparedStatement statement) 
 			throws NullPreparedStatementException {
@@ -47,10 +44,10 @@ public class QueryHandler {
 		
 		catch(SQLException se) {
 			throw new NullPreparedStatementException("Satement is null");
-		}
-		
-		
+		}		
 	}
+	
+	
 	public void closeResultSet(ResultSet resultSet) throws NullResultSetException {
 		try {
 			if(resultSet!=null) {

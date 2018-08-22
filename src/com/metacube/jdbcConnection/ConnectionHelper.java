@@ -10,7 +10,7 @@ public final class ConnectionHelper {
 	private ConnectionHelper(){
 		
 	}
-	public static java.sql.Connection getConnection() throws ClassNotFoundException, SQLException, MySqlDriverClassException{ 
+	public static Connection getConnection() throws MySqlDriverClassException{ 
 			java.sql.Connection conn=null;
 			String DB_URL = "jdbc:mysql://localhost/storefront1";
 			
@@ -25,14 +25,14 @@ public final class ConnectionHelper {
 			}
 			
 			catch (SQLException e) {
-				throw new SQLException();
+				e.printStackTrace();
 			}
 			
 			return conn;
 	}
 	
 	
-	public static void closeConection(Connection conn) throws SQLException, NullConnectionException{
+	public static void closeConection(Connection conn) throws NullConnectionException{
 		try {
 			if(conn!=null) {
 				conn.close();

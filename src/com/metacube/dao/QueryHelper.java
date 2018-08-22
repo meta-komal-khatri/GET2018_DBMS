@@ -1,4 +1,4 @@
-package com.metacube.DAO;
+package com.metacube.dao;
 
 public class QueryHelper {
 	private static String query;
@@ -6,8 +6,7 @@ public class QueryHelper {
 	QueryHelper(){
 	}
 	public static String selectOrdersByShopperId(int id) {
-		query="SELECT Order_Id,Date_order FROM storefront1.order WHERE status='shipped' AND Shopper_Id='"+id+
-				"'ORDER BY Date_order ASC";
+		query="SELECT Order_Id,Date_order FROM storefront1.order WHERE status='shipped' AND Shopper_Id=? ORDER BY Date_order ASC";
 		return query;
 	}
 	public static String insertImages(int id) {

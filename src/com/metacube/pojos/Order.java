@@ -1,6 +1,7 @@
-package com.metacube.DAO;
+package com.metacube.pojos;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 	private int shopperId;
@@ -65,5 +66,6 @@ public class Order {
 	public void setDateOrder(Date dateOrder) {
 		this.dateOrder = dateOrder;
 	}
+	
 	
 }

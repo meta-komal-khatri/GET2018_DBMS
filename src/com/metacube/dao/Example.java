@@ -1,4 +1,4 @@
-package com.metacube.DAO;
+package com.metacube.dao;
 import com.metacube.exception.*;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -10,8 +10,8 @@ public class Example {
 public static void main(String[] args) throws ClassNotFoundException, SQLException, NullResultSetException, NullConnectionException, MySqlDriverClassException, NullPreparedStatementException, FileNotFoundException{
 	
 	OrderDao dao=new OrderDao(ConnectionHelper.getConnection());
-	List<Order> orderList=dao.selectByShopperId(3);
-	System.out.println(orderList.toString());
+	dao.selectByShopperId(5);
+	
 	
 }
 }

@@ -1,6 +1,7 @@
-package com.metacube.DAO;
+package com.metacube.dao;
 import com.metacube.exception.*;
 import com.metacube.jdbcConnection.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,41 +17,42 @@ public class ProductImagesDao extends QueryHandler{
 
 	ProductImagesDao(Connection conn) {
 		super(conn);
-		System.out.println("mdk");
 	}
-	public void insertImage(List<String> images,int id) 
-			throws NullPreparedStatementException, SQLException, NullConnectionException, FileNotFoundException{
+	public void insertImage(List<String> images,int id) {
 		PreparedStatement preparedStatement=null;
 		FileInputStream inputStream=null;
 		String query=QueryHelper.insertImages(id);
 		try{
-			
 			preparedStatement=conn.prepareStatement(query);
 			conn.setAutoCommit(false);
-			
+
 			for (int i = 0; i < images.size(); i++) {
-				
+
 				File file=new File(images.get(i));
 				inputStream = new FileInputStream(file);
-				
+
 				preparedStatement.setInt(1, id);
 				preparedStatement.setBinaryStream(2, (InputStream) inputStream,(int)file.length());
-				
+
 				preparedStatement.addBatch();
 				//preparedStatement.execute();
 			}
-			
+
 			int[] result=preparedStatement.executeBatch(); 
 			conn.commit();
 		}
-		
+
 		catch(FileNotFoundException e){
-			throw new FileNotFoundException("No such image file exist");	
+			e.printStackTrace();	
 		}
-		
-		
+
+
 		catch(BatchUpdateException e) {
-			rollback();
+			try {
+				rollback();
+			} catch (NullConnectionException e1) {
+				e1.printStackTrace();
+			}
 			//throw new BatchUpdateException();
 			/*int[] updateCount = e.getUpdateCounts();
 			int count = 1;
@@ -58,25 +60,40 @@ public class ProductImagesDao extends QueryHandler{
 				if  (i == Statement.EXECUTE_FAILED) {
 					System.out.println("Error on request " + count +": Execute failed");
 				} 
-				
+
 				else {
 					System.out.println("Request " + count +": OK");
 				}
 
 				count++;*/
-			}
-		
+		}
+
 
 		catch(SQLException ex){
-			rollback();
+			try {
+				rollback();
+			} catch (NullConnectionException e) {
+				e.printStackTrace();
+			}
 		}
-		
+
 		finally
 		{
-			closePreparedStatement(preparedStatement);
-			ConnectionHelper.closeConection(conn);
+			try {
+				closePreparedStatement(preparedStatement);
+			} catch (NullPreparedStatementException e) {
+				e.printStackTrace();
+			}
+			try {
+				ConnectionHelper.closeConection(conn);
+			} catch (NullConnectionException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
-		
+
 	}
 
 }
