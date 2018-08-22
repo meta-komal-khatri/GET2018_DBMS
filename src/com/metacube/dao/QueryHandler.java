@@ -29,11 +29,6 @@ public class QueryHandler {
 		return resultSet;
 	}
 	
-	public void insertImagesIntoProduct(List<String> images,int id){
-		ProductImagesDao dao=new ProductImagesDao(conn);
-	
-	}
-	
 	public void closePreparedStatement(PreparedStatement statement) 
 			throws NullPreparedStatementException {
 		try {

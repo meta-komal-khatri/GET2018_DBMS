@@ -18,10 +18,11 @@ public class ProductImagesDao extends QueryHandler{
 	ProductImagesDao(Connection conn) {
 		super(conn);
 	}
-	public void insertImage(List<String> images,int id) {
+	public int insertImage(List<String> images,int id) {
 		PreparedStatement preparedStatement=null;
 		FileInputStream inputStream=null;
-		String query=QueryHelper.insertImages(id);
+		int[] result=new int[100];
+		String query=QueryHelper.insertImages();
 		try{
 			preparedStatement=conn.prepareStatement(query);
 			conn.setAutoCommit(false);
@@ -38,8 +39,9 @@ public class ProductImagesDao extends QueryHandler{
 				//preparedStatement.execute();
 			}
 
-			int[] result=preparedStatement.executeBatch(); 
+			result=preparedStatement.executeBatch(); 
 			conn.commit();
+			
 		}
 
 		catch(FileNotFoundException e){
@@ -49,23 +51,22 @@ public class ProductImagesDao extends QueryHandler{
 
 		catch(BatchUpdateException e) {
 			try {
+				System.out.println(e.getMessage());
 				rollback();
+				int[] updateCount = e.getUpdateCounts();
+				int count = 1;
+				for (int i : updateCount) {
+					if  (i == Statement.EXECUTE_FAILED) {
+						System.out.println("Error on request " + count +": Execute failed");
+					} 
+
+					else {
+						System.out.println("Request " + count +": OK");
+					}
+					count++;}
 			} catch (NullConnectionException e1) {
 				e1.printStackTrace();
 			}
-			//throw new BatchUpdateException();
-			/*int[] updateCount = e.getUpdateCounts();
-			int count = 1;
-			for (int i : updateCount) {
-				if  (i == Statement.EXECUTE_FAILED) {
-					System.out.println("Error on request " + count +": Execute failed");
-				} 
-
-				else {
-					System.out.println("Request " + count +": OK");
-				}
-
-				count++;*/
 		}
 
 
@@ -93,6 +94,7 @@ public class ProductImagesDao extends QueryHandler{
 			}
 
 		}
+		return result.length;
 
 	}
 
