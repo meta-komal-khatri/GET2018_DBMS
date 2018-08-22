@@ -25,4 +25,13 @@ public class QueryHelper {
 				+ "SET p.P_status='"+"Inactive"+"'";
            return query;      
 	}
+	public static String selectTopCategoriesAndTheirChildCount(){
+		query="SELECT Category_type,IFNULL(ct.Counted,0)\n "
+				+ "FROM category c LEFT JOIN\n"
+				+ "(SELECT Parent_Cat_Id,COUNT(*) AS counted FROM category\n"
+				+ "WHERE Parent_Cat_Id IS NOT NULL GROUP BY Parent_Cat_Id ) ct \n"
+				+ "ON c.Category_Id=ct.Parent_Cat_Id \n"
+				+ "WHERE c.Parent_Cat_Id IS NULL ";
+		return query;
+	}
 }

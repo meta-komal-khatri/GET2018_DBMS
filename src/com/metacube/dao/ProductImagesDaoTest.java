@@ -22,7 +22,7 @@ public class ProductImagesDaoTest {
 			int j=dao.insertImage(imageList, 3);
 			System.out.print(j);
 		} catch (MySqlDriverClassException e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 		
 	}
