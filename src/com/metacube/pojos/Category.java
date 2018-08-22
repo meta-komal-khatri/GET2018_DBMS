@@ -3,7 +3,7 @@ package com.metacube.pojos;
 public class Category {
 	private int countOfChild;
 	private String categoryType;
-	Category(int countOfChild,String categoryType){
+	public Category(int countOfChild,String categoryType){
 		this.setCountOfChild(countOfChild);
 		this.setCategoryType(categoryType);
 	}

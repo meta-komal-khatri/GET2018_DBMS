@@ -10,29 +10,32 @@ public final class ConnectionHelper {
 	private ConnectionHelper(){
 		
 	}
-	public static Connection getConnection() throws MySqlDriverClassException{ 
+	public static Connection getConnection(){ 
 			java.sql.Connection conn=null;
 			String DB_URL = "jdbc:mysql://localhost/storefront1";
 			
 			try {
 				
-				Class.forName("com.mysql.jdbc.Driver");
+				Class.forName("com.mysql.cj.jdbc.Driver");
 				conn=DriverManager.getConnection(DB_URL,"root", "1234");
 			} 
 			
-			catch (ClassNotFoundException e) {
-				throw new MySqlDriverClassException("JDBC Driver class not found");
-			}
-			
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
+			 catch (ClassNotFoundException e)
+		    {
+		      e.printStackTrace();
+		      System.exit(1);
+		    }
+		    catch (SQLException e)
+		    {
+		      e.printStackTrace();
+		      System.exit(2);
+		    }
 			
 			return conn;
 	}
 	
 	
-	public static void closeConection(Connection conn) throws NullConnectionException{
+	public static void closeConection(Connection conn){
 		try {
 			if(conn!=null) {
 				conn.close();
@@ -40,7 +43,7 @@ public final class ConnectionHelper {
 		}
 		
 		catch(SQLException se) {
-			throw new NullConnectionException("Connection is null");
+			se.printStackTrace();
 		}
 	}
 }
